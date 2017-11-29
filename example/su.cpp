@@ -4,8 +4,8 @@
 
 int main()
 {
-	std::string v1 = "123";
-	su::printf(v1, "real %+.2f %llf .", 3.141596f, 3.141596);
+  std::string v1 = "123";
+  su::printf(v1, "real %+.2f %llf .", 3.141596f, 3.141596);
 
   std::string v2;
   su::printf(v2, "integer %lld %d %hd %hhi .", 7000000000000, 70000, 70000, 70000);

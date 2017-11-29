@@ -7,13 +7,18 @@
 #include <cstdarg>
 #include <cctype>
 #include <string>
+#include <type_traits>
 
 namespace su {
 
-  // T can only be std::string
+  // T can only be a specialization of 
+  //   std::basic_string< char, std::char_traits<char>, Alloc >
   template< typename T >
   int32_t printf( T& str, const char* format, ...)
   {
+    static_assert(std::is_same<T::value_type, char>(), 
+      "T should be a specialization of std::basic_string< char, std::char_traits<char>, Alloc >.");
+
     va_list ap;
     va_start(ap, format);
     
@@ -617,6 +622,8 @@ namespace su {
   template< typename T, typename S >
   void make_trim( T& str, const S* chars )
   {
+    static_assert(std::is_same<T::value_type, S>(), "T::value_type should be the same type as S.");
+
     T::size_type cnt = 0;
     for (T::size_type i = 0; i < str.size(); ++i)
     {
@@ -664,6 +671,8 @@ namespace su {
   template< typename T, typename S >
   T trim( const T& str, const S* chars )
   {
+    static_assert(std::is_same<T::value_type, S>(), "T::value_type should be the same type as S.");
+
     T r(str);
     make_trim(r, chars);
     return r;
@@ -677,12 +686,16 @@ namespace su {
     return r;
   }
 
-  // T should be a container type which supports push_back() and size().
-  // S should be a std::basic_string derived type.
+  // T should be a container type which supports push_back() and size(), 
+  // and the element type should be S.
+  // S should be any std::basic_string derived type.
   // R should be the same type as S::value_type.
   template< typename T, typename S, typename R >
   uint32_t split( T& out, const S& str, const R* delim, bool keepEmptyTokens = false )
   {
+    static_assert(std::is_same<T::value_type, S>(), "T::value_type should be the same type as S.");
+    static_assert(std::is_same<S::value_type, R>(), "S::value_type should be the same type as R.");
+
     S::size_type head = 0;
     for (S::size_type i = 0; i < str.size(); ++i)
     {
