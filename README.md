@@ -14,6 +14,11 @@ Supported width: (number),*
 Supported .precision: .(number),.*  
 Supported length sub-specifiers: hh,h,l,ll  
 
+Example:
+```
+    std::string a = su.printf("%d, %12.12s", 123, "abcdefghijklm");
+```
+
 ### su::to_lower(), su::to_upper()
 
 Return a new std::string with content cloned from the input std::string but translating all letters to lower-case or upper-case.
@@ -33,3 +38,12 @@ Make all leading and trailing space letters of the input std::string trimmed in-
 ### su::split()
 
 Take a container, an input std::string, and a string of characters used as delimiters. Split the content into tokens by the delimiters and store in the container. The container can be any class which supports clear(), push_back(), and size().
+
+Example:
+```
+    std::string to_split("abc def,123");
+    std::vector<std::string> tokens;
+    
+    auto cnt = su.split(tokens, to_split, " ,");
+    // 'cnt' is 3 and 'tokens' has 3 members: "abc", "def", "123"
+```
