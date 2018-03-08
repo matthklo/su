@@ -21,11 +21,11 @@ Example:
 
 ### su::to_lower(), su::to_upper()
 
-Return a new std::string with content cloned from the input std::string but translating all letters to lower-case or upper-case.
+Return a new std::string with content cloned from the input std::string but translating all letters to either lower-case or upper-case.
 
 ### su::make_lower(), su::make_upper()
 
-Translate all letters of input std::string to lower-case or upper-case in-place.
+Translate all letters of input std::string to either lower-case or upper-case "in-place".
 
 ### su::trim()
 
@@ -33,7 +33,7 @@ Return a new std::string with content cloned from the input std::string but has 
 
 ### su::make_trim()
 
-Make all leading and trailing space letters of the input std::string trimmed in-place.
+Make all leading and trailing space letters of the input std::string trimmed "in-place".
 
 ### su::split()
 
